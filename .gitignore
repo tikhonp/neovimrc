@@ -41,3 +41,4 @@ luac.out
 
 # Local
 *.DS_Store
+lazy-lock.json
