@@ -1,10 +1,14 @@
 return {
     "nvim-treesitter/nvim-treesitter",
 
+    dependencies = {
+        "apple/pkl-neovim"
+    },
+
     build = ":TSUpdate",
 
     opts = {
-        ensure_installed = { "javascript", "typescript", "bash", "html", "lua", "markdown", "vim", "vimdoc", "go" },
+        ensure_installed = { "pkl", "javascript", "typescript", "bash", "html", "lua", "markdown", "vim", "vimdoc", "go" },
         sync_install = false,
         auto_install = true,
         indent = {
@@ -23,12 +27,14 @@ return {
         treesitter_parser_config.templ = {
             install_info = {
                 url = "https://github.com/vrischmann/tree-sitter-templ.git",
-                files = {"src/parser.c", "src/scanner.c"},
+                files = { "src/parser.c", "src/scanner.c" },
                 branch = "master",
             },
         },
 
         vim.treesitter.language.register("templ", "templ")
+
+        vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
     end,
 
 }
