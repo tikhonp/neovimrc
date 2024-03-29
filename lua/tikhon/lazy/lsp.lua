@@ -99,7 +99,6 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "gopls",
-                "pyright",
             },
             handlers = {
                 default_setup,
@@ -141,7 +140,6 @@ return {
                 ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
                 ["<C-y>"] = cmp.mapping.confirm({ select = true }),
             }),
-            -- formatting = lsp_zero.cmp_format({ details = true }),
         })
     end,
 }
