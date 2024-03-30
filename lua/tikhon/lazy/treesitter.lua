@@ -8,7 +8,7 @@ return {
     build = ":TSUpdate",
 
     opts = {
-        ensure_installed = { "pkl", "javascript", "typescript", "bash", "html", "lua", "markdown", "vim", "vimdoc", "go" },
+        ensure_installed = { "http", "pkl", "javascript", "typescript", "bash", "html", "lua", "markdown", "vim", "vimdoc", "go" },
         sync_install = false,
         auto_install = true,
         indent = {
