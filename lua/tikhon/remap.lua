@@ -25,8 +25,6 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Also stay cursor in middle while sea
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to system" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank to system" })
 
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format current buffer" })
-
 vim.keymap.set("n", "<leader>i", "gg=G", { desc = "Indent whole file" })
 
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
