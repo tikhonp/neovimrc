@@ -141,5 +141,7 @@ return {
                 ["<C-y>"] = cmp.mapping.confirm({ select = true }),
             }),
         })
+
+        vim.keymap.set("n", "<leader>vlr", "<cmd>LspRestart<CR>", { desc = "[V]im [L]sp [R]estart" })
     end,
 }
