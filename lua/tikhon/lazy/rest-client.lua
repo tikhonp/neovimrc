@@ -4,7 +4,7 @@ return {
 
     config = function()
         vim.g.vrc_set_default_mapping = 0
-        vim.g.vrc_split_request_body = 1
+        vim.g.vrc_split_request_body = 0
 
         vim.g.vrc_curl_opts = {
             ["--silent"] = "",
@@ -29,6 +29,9 @@ return {
             vim.g.vrc_body_preprocessor = ""
             print("vrc_body_preprocessor set to NULL")
         end, { desc = "[R]est [U]nset [J]son vrc_body_preprocessor" })
+
+        -- Set json body preproccessor by default
+        -- vim.g.vrc_body_preprocessor = "jq -c ."
     end
 
 }

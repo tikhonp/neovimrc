@@ -111,7 +111,7 @@ return {
                 gopls = function()
                     require("lspconfig").gopls.setup({
                         capabilities = capabilities,
-                        settings = gopls_settings,
+                        -- settings = gopls_settings,
                     })
                 end,
             }

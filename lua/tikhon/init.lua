@@ -9,11 +9,9 @@ vim.filetype.add({
 })
 
 local augroup = vim.api.nvim_create_augroup
-local yank_group = augroup("HighlightYank", {})
-local tikhon_group = augroup("TikhonGroup", {})
-
 local autocmd = vim.api.nvim_create_autocmd
 
+local yank_group = augroup("HighlightYank", {})
 autocmd("TextYankPost", {
     group = yank_group,
     pattern = "*",
@@ -25,10 +23,20 @@ autocmd("TextYankPost", {
     end,
 })
 
+local remap_lsp_group = augroup("RemapLsp", {})
+local format_on_save_group = augroup("formatOnSave", {})
 autocmd("LspAttach", {
-    group = tikhon_group,
+    group = remap_lsp_group,
     callback = function(e)
         local opts = { buffer = e.buf }
+
+        autocmd("BufWritePre", {
+            group = format_on_save_group,
+            buffer = e.buf,
+            callback = function()
+                vim.lsp.buf.format()
+            end,
+        })
 
         vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 
