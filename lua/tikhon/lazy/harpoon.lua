@@ -11,7 +11,7 @@ return {
 
         harpoon:setup()
 
-        vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
+        vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
 
         local toggle_opts = {
             border = "rounded",

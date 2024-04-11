@@ -99,6 +99,9 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "gopls",
+                "templ",
+                "html",
+                "tailwindcss",
             },
             handlers = {
                 default_setup,
@@ -114,6 +117,19 @@ return {
                         -- settings = gopls_settings,
                     })
                 end,
+                html = function()
+                    require("lspconfig").html.setup({
+                        capabilities = capabilities,
+                        filetypes = { "html", "templ" },
+                    })
+                end,
+                tailwindcss = function()
+                    require("lspconfig").tailwindcss.setup({
+                        capabilities = capabilities,
+                        filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+                        init_options = { userLanguages = { templ = "html" } },
+                    })
+                end
             }
         })
 

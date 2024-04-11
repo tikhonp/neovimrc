@@ -37,3 +37,5 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.opt.hlsearch = true
+
+vim.g.netrw_bufsettings = "noma nomod nu nowrap ro nobl"
