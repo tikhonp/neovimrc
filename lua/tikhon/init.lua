@@ -68,3 +68,7 @@ autocmd("LspAttach", {
         vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
     end
 })
+
+vim.g.netrw_bufsettings = "noma nomod nu nowrap ro nobl"
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25

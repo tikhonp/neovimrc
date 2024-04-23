@@ -22,7 +22,7 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.signcolumn = "auto"
+vim.opt.signcolumn = "yes"
 
 vim.opt.timeoutlen = 300
 vim.opt.updatetime = 50
@@ -38,4 +38,4 @@ vim.opt.splitbelow = true
 
 vim.opt.hlsearch = true
 
-vim.g.netrw_bufsettings = "noma nomod nu nowrap ro nobl"
+vim.opt.termguicolors = true

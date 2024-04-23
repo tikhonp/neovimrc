@@ -1,5 +1,4 @@
 return {
-    "mbbill/undotree",
     "eandrju/cellular-automaton.nvim",
     {
         "vhyrro/luarocks.nvim",

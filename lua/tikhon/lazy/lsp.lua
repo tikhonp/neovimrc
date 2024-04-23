@@ -1,3 +1,14 @@
+local pylsp_settings = {
+    pylsp = {
+        plugins = {
+            pycodestyle = {
+                -- ignore = { 'W391' },
+                maxLineLength = 100
+            },
+        },
+    },
+}
+
 local lua_ls_settings = {
     Lua = {
         runtime = {
@@ -102,9 +113,16 @@ return {
                 "templ",
                 "html",
                 "tailwindcss",
+                "pylsp",
             },
             handlers = {
                 default_setup,
+                pylsp = function()
+                    require("lspconfig").pylsp.setup({
+                        capabilities = capabilities,
+                        settings = pylsp_settings,
+                    })
+                end,
                 lua_ls = function()
                     require("lspconfig").lua_ls.setup({
                         capabilities = capabilities,
@@ -131,6 +149,11 @@ return {
                     })
                 end
             }
+        })
+
+        require("lspconfig")["sourcekit"].setup({
+            -- cmd = { "sourcekit-lsp", "--log-level", "info" },
+            capabilities = capabilities,
         })
 
         local cmp = require("cmp")
