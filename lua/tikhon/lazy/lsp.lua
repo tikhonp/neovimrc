@@ -114,6 +114,7 @@ return {
                 "html",
                 "tailwindcss",
                 "pylsp",
+                "tsserver",
             },
             handlers = {
                 default_setup,
