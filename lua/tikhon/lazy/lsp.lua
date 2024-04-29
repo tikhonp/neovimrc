@@ -25,54 +25,6 @@ local lua_ls_settings = {
     },
 }
 
-local gopls_settings = {
-    gopls = {
-        analyses = {
-            assign = true,
-            atomic = true,
-            bools = true,
-            composites = true,
-            copylocks = true,
-            deepequalerrors = true,
-            embed = true,
-            errorsas = true,
-            fieldalignment = true,
-            httpresponse = true,
-            ifaceassert = true,
-            loopclosure = true,
-            lostcancel = true,
-            nilfunc = true,
-            nilness = true,
-            nonewvars = true,
-            printf = true,
-            shadow = true,
-            shift = true,
-            simplifycompositelit = true,
-            simplifyrange = true,
-            simplifyslice = true,
-            sortslice = true,
-            stdmethods = true,
-            stringintconv = true,
-            structtag = true,
-            testinggoroutine = true,
-            tests = true,
-            timeformat = true,
-            unmarshal = true,
-            unreachable = true,
-            unsafeptr = true,
-            unusedparams = true,
-            unusedresult = true,
-            unusedvariable = true,
-            unusedwrite = true,
-            useany = true,
-        },
-        hoverKind = "FullDocumentation",
-        linkTarget = "pkg.go.dev",
-        usePlaceholders = true,
-        vulncheck = "Imports",
-    },
-}
-
 return {
 
     "neovim/nvim-lspconfig",
@@ -130,12 +82,6 @@ return {
                         settings = lua_ls_settings,
                     })
                 end,
-                gopls = function()
-                    require("lspconfig").gopls.setup({
-                        capabilities = capabilities,
-                        -- settings = gopls_settings,
-                    })
-                end,
                 html = function()
                     require("lspconfig").html.setup({
                         capabilities = capabilities,
@@ -183,5 +129,12 @@ return {
         })
 
         vim.keymap.set("n", "<leader>vlr", "<cmd>LspRestart<CR>", { desc = "[V]im [L]sp [R]estart" })
+
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+            border = "rounded",
+        })
+        vim.diagnostic.config {
+            float = { border = "rounded" },
+        }
     end,
 }
