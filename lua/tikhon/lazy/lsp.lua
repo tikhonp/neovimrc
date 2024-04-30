@@ -67,6 +67,7 @@ return {
                 "tailwindcss",
                 "pylsp",
                 "tsserver",
+                "bashls",
             },
             handlers = {
                 default_setup,
