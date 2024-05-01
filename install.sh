@@ -6,5 +6,5 @@ then
     exit 1;
 fi
 
-rm -rf $XDG_CONFIG_HOME/nvim
-cp -r $(pwd) $XDG_CONFIG_HOME/nvim
+rm -rf "$XDG_CONFIG_HOME"/nvim
+cp -r "$(pwd)" "$XDG_CONFIG_HOME"/nvim
