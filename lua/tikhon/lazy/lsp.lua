@@ -68,6 +68,7 @@ return {
                 "pylsp",
                 "tsserver",
                 "bashls",
+                "clangd",
             },
             handlers = {
                 default_setup,
