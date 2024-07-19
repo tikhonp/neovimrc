@@ -105,6 +105,11 @@ return {
             capabilities = capabilities,
         })
 
+        require("lspconfig")["dartls"].setup({
+            cmd = { "dart", 'language-server', '--protocol=lsp' },
+            capabilities = capabilities,
+        })
+
         local cmp = require("cmp")
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
         cmp.setup({
