@@ -43,15 +43,17 @@ return {
     },
 
     config = function()
+        local lspconfig = require("lspconfig")
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
             "force",
             {},
             vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities())
+            cmp_lsp.default_capabilities()
+        )
 
         local default_setup = function(server)
-            require("lspconfig")[server].setup({
+            lspconfig[server].setup({
                 capabilities = capabilities,
             })
         end
@@ -73,25 +75,25 @@ return {
             handlers = {
                 default_setup,
                 pylsp = function()
-                    require("lspconfig").pylsp.setup({
+                    lspconfig.pylsp.setup({
                         capabilities = capabilities,
                         settings = pylsp_settings,
                     })
                 end,
                 lua_ls = function()
-                    require("lspconfig").lua_ls.setup({
+                    lspconfig.lua_ls.setup({
                         capabilities = capabilities,
                         settings = lua_ls_settings,
                     })
                 end,
                 html = function()
-                    require("lspconfig").html.setup({
+                    lspconfig.html.setup({
                         capabilities = capabilities,
                         filetypes = { "html", "templ" },
                     })
                 end,
                 tailwindcss = function()
-                    require("lspconfig").tailwindcss.setup({
+                    lspconfig.tailwindcss.setup({
                         capabilities = capabilities,
                         filetypes = { "templ", "astro", "javascript", "typescript", "react" },
                         init_options = { userLanguages = { templ = "html" } },
@@ -100,12 +102,7 @@ return {
             }
         })
 
-        require("lspconfig")["sourcekit"].setup({
-            -- cmd = { "sourcekit-lsp", "--log-level", "info" },
-            capabilities = capabilities,
-        })
-
-        require("lspconfig")["dartls"].setup({
+        lspconfig["dartls"].setup({
             cmd = { "dart", 'language-server', '--protocol=lsp' },
             capabilities = capabilities,
         })
