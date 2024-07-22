@@ -9,13 +9,19 @@ return {
     },
 
     config = function()
-        require("telescope").setup({
+        require('telescope').setup {
             extensions = {
                 ["ui-select"] = {
-                    require("telescope.themes").get_cursor({})
+                    require("telescope.themes").get_cursor {
+                        layout_config = {
+                            height = 0.4,
+                            width = 0.25,
+                            prompt_position = "bottom",
+                        },
+                    }
                 }
             }
-        })
+        }
 
         local builtin = require("telescope.builtin")
         vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
