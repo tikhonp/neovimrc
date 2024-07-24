@@ -103,7 +103,7 @@ return {
         })
 
         lspconfig["dartls"].setup({
-            cmd = { "dart", 'language-server', '--protocol=lsp' },
+            cmd = { "fvm", "dart", "language-server", "--protocol=lsp" },
             capabilities = capabilities,
         })
 

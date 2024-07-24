@@ -15,7 +15,7 @@ return {
                     require("telescope.themes").get_cursor {
                         layout_config = {
                             height = 0.4,
-                            width = 0.25,
+                            width = 0.3,
                             prompt_position = "bottom",
                         },
                     }
