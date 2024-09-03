@@ -20,6 +20,7 @@ local lua_ls_settings = {
         workspace = {
             library = {
                 vim.env.VIMRUNTIME,
+                "${3rd}/luv/library",
             }
         }
     },

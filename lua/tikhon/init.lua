@@ -64,10 +64,26 @@ autocmd("LspAttach", {
         vim.keymap.set("n", "<leader>f", custom_format, { desc = "Format current buffer" })
 
         vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
     end
 })
+
+
+local newline_on_save = augroup("NewlineOnSave", {})
+autocmd("BufWritePre", {
+    group = newline_on_save,
+    pattern = '*',
+    callback = function()
+        local n_lines = vim.api.nvim_buf_line_count(0)
+        local last_nonblank = vim.fn.prevnonblank(n_lines)
+        if last_nonblank <= n_lines then
+            vim.api.nvim_buf_set_lines(0,
+                last_nonblank, n_lines, true, { '' })
+        end
+    end,
+})
+
 
 vim.g.netrw_bufsettings = "noma nomod nu nowrap ro nobl"
 vim.g.netrw_banner = 0
