@@ -16,7 +16,7 @@ vim.opt.smartindent = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
+vim.opt.undodir = (vim.env.HOME or vim.fn.stdpath("cache")) .. "/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.ignorecase = true
@@ -39,3 +39,4 @@ vim.opt.splitbelow = true
 vim.opt.hlsearch = true
 
 vim.opt.termguicolors = true
+
