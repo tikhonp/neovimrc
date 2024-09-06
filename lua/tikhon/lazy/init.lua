@@ -1,4 +1,5 @@
 return {
+    "puremourning/vimspector",
     "eandrju/cellular-automaton.nvim",
     {
         "vhyrro/luarocks.nvim",
