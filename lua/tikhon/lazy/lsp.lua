@@ -54,7 +54,8 @@ return {
         )
 
         local default_setup = function(server)
-            lspconfig[server].setup({
+            local server_name = server == 'tsserver' and 'ts_ls' or server
+            lspconfig[server_name].setup({
                 capabilities = capabilities,
             })
         end
