@@ -1,3 +1,13 @@
+local gopls_settings = {
+    gopls = {
+        analyses = {
+            unusedresult = true,
+            unusedvariable = true,
+        },
+        staticcheck = true,
+    }
+}
+
 local pylsp_settings = {
     pylsp = {
         plugins = {
@@ -76,6 +86,12 @@ return {
             },
             handlers = {
                 default_setup,
+                gopls = function()
+                    lspconfig.gopls.setup({
+                        capabilities = capabilities,
+                        settings = gopls_settings,
+                    })
+                end,
                 pylsp = function()
                     lspconfig.pylsp.setup({
                         capabilities = capabilities,
