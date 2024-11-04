@@ -69,20 +69,23 @@ return {
             })
         end
 
+        local mason_servers = {
+            "lua_ls",
+            "gopls",
+            "templ",
+            "html",
+            "tailwindcss",
+            "pylsp",
+            "ts_ls",
+            "bashls",
+        }
+        if vim.loop.os_uname().sysname == "Darwin" then
+            table.insert(mason_servers, "clangd")
+        end
         require("fidget").setup({})
         require("mason").setup({})
         require("mason-lspconfig").setup({
-            ensure_installed = {
-                "lua_ls",
-                "gopls",
-                "templ",
-                "html",
-                "tailwindcss",
-                "pylsp",
-                "ts_ls",
-                "bashls",
-                "clangd",
-            },
+            ensure_installed = mason_servers,
             handlers = {
                 default_setup,
                 gopls = function()
@@ -119,10 +122,16 @@ return {
             }
         })
 
-        lspconfig["dartls"].setup({
+        lspconfig.dartls.setup({
             cmd = { "fvm", "dart", "language-server", "--protocol=lsp" },
             capabilities = capabilities,
         })
+        if vim.loop.os_uname().sysname == "Linux" then
+            -- clangd native setup for my aarch64 linux
+            lspconfig.clangd.setup({
+                capabilities = capabilities,
+            })
+        end
 
         local cmp = require("cmp")
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
