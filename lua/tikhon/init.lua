@@ -1,19 +1,8 @@
-vim.filetype.add({ extension = { templ = "templ" } })
-
 require("tikhon.set")
 require("tikhon.remap")
 require("tikhon.lazy_init")
 
 local api = vim.api
-
-local add_newline_at_end = function()
-    local n_lines = api.nvim_buf_line_count(0)
-    local last_nonblank = vim.fn.prevnonblank(n_lines)
-    if last_nonblank <= n_lines then
-        api.nvim_buf_set_lines(0,
-            last_nonblank, n_lines, true, { '' })
-    end
-end
 
 ---@param bufnr integer
 ---@param mode "v"|"V"
@@ -87,9 +76,7 @@ local lsp_buf_format = function()
     else
         vim.lsp.buf.format()
     end
-    add_newline_at_end()
 end
-
 
 local augroup = api.nvim_create_augroup
 local autocmd = api.nvim_create_autocmd
@@ -133,6 +120,17 @@ autocmd("LspAttach", {
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
     end
+})
+
+local two_spaces_identaiton = augroup("TwoSpacesIndentation", {})
+autocmd("FileType", {
+    group = two_spaces_identaiton,
+    pattern = "json,html,xml,yaml",
+    callback = function()
+        vim.bo.tabstop = 2
+        vim.bo.softtabstop = 2
+        vim.bo.shiftwidth = 2
+    end,
 })
 
 vim.g.netrw_bufsettings = "noma nomod nu nowrap ro nobl"

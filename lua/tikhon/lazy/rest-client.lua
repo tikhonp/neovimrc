@@ -2,6 +2,8 @@ return {
 
     "diepm/vim-rest-console",
 
+    event = "VeryLazy",
+
     config = function()
         vim.g.vrc_set_default_mapping = 0
         vim.g.vrc_split_request_body = 0

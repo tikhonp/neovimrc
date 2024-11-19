@@ -2,6 +2,8 @@ return {
 
     "github/copilot.vim",
 
+    event = "VeryLazy",
+
     config = function()
         local proxy_server = os.getenv("MY_PROXY_SERVER")
         if (proxy_server == nil) then
@@ -22,4 +24,3 @@ return {
     end,
 
 }
-

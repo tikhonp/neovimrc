@@ -26,12 +26,9 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank to system" })
 
 vim.keymap.set("n", "<leader>i", "gg=G", { desc = "Indent whole file" })
 
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
-
 vim.keymap.set("n", "]q", "<cmd>cn<CR>", { desc = "Next quickfix" })
 vim.keymap.set("n", "[q", "<cmd>cp<CR>", { desc = "Previous quickfix" })
 
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-

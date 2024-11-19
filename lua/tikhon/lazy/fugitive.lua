@@ -2,11 +2,12 @@ return {
 
     "tpope/vim-fugitive",
 
+    keys = {
+        { "<leader>g", vim.cmd.Git, "n" },
+    },
+
     config = function()
-        vim.keymap.set("n", "<leader>g", vim.cmd.Git)
-
         local tikhon_fugitive_group = vim.api.nvim_create_augroup("tikhon_fugitive_group", {})
-
         vim.api.nvim_create_autocmd("BufWinEnter", {
             group = tikhon_fugitive_group,
             pattern = "*",
@@ -38,4 +39,3 @@ return {
     end,
 
 }
-

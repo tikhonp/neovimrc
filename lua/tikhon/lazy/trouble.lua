@@ -3,6 +3,7 @@ return {
     dependencies = {
         "artemave/workspace-diagnostics.nvim",
     },
+    event = "VeryLazy",
     config = function()
         require("trouble").setup({})
 
@@ -32,3 +33,4 @@ return {
         })
     end,
 }
+

@@ -53,6 +53,8 @@ return {
         "j-hui/fidget.nvim",
     },
 
+    event = "VeryLazy",
+
     config = function()
         local lspconfig = require("lspconfig")
         local cmp_lsp = require("cmp_nvim_lsp")
