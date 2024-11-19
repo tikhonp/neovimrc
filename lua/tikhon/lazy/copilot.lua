@@ -2,7 +2,17 @@ return {
 
     "github/copilot.vim",
 
-    event = "VeryLazy",
+    keys = {
+        { "<leader>cp", "<cmd>Copilot panel<CR>", "n" },
+        { "<leader>ce", function()
+            vim.cmd("Copilot enable")
+            vim.notify("[Copilot] Enabled")
+        end, "n" },
+        { "<leader>cd", function()
+            vim.cmd("Copilot disable")
+            vim.notify("[Copilot] Disabled")
+        end, "n" },
+    },
 
     config = function()
         local proxy_server = os.getenv("MY_PROXY_SERVER")
@@ -11,16 +21,6 @@ return {
             return
         end
         vim.g.copilot_proxy = proxy_server
-
-        vim.keymap.set("n", "<leader>cp", "<cmd>Copilot panel<CR>", { desc = "Open [C]opilot [P]anel" })
-        vim.keymap.set("n", "<leader>ce", function()
-            vim.cmd("Copilot enable")
-            vim.notify("[Copilot] Enabled")
-        end, { desc = "Open [C]opilot [E]nable" })
-        vim.keymap.set("n", "<leader>cd", function()
-            vim.cmd("Copilot disable")
-            vim.notify("[Copilot] Disabled")
-        end, { desc = "Open [C]opilot [D]isable" })
     end,
 
 }
