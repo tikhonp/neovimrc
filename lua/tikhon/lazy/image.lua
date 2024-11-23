@@ -1,6 +1,16 @@
 return {
     "3rd/image.nvim",
     event = "VeryLazy",
+    dependecies = {
+        -- brew install imagemagick pkg-config
+        -- on macos
+        {
+            "vhyrro/luarocks.nvim",
+            opts = {
+                rocks = { "magick" },
+            },
+        },
+    },
     opts = {
         integrations = {
             backend = "kitty",
