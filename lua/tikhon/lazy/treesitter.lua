@@ -4,7 +4,6 @@ return {
 
     dependencies = {
         "apple/pkl-neovim",
-        "hexdigest/go-enhanced-treesitter.nvim",
     },
 
     build = ":TSUpdate",
@@ -42,4 +41,3 @@ return {
     end,
 
 }
-
