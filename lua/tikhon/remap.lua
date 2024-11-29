@@ -32,3 +32,5 @@ vim.keymap.set("n", "[q", "<cmd>cp<CR>", { desc = "Previous quickfix" })
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+vim.keymap.set("n", "<leader>mt", "<cmd>!make templ<CR>")
