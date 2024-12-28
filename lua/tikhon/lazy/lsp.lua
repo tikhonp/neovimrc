@@ -73,7 +73,6 @@ return {
 
         local mason_servers = {
             "lua_ls",
-            "gopls",
             "templ",
             "html",
             "tailwindcss",
@@ -90,12 +89,6 @@ return {
             ensure_installed = mason_servers,
             handlers = {
                 default_setup,
-                gopls = function()
-                    lspconfig.gopls.setup({
-                        capabilities = capabilities,
-                        settings = gopls_settings,
-                    })
-                end,
                 pylsp = function()
                     lspconfig.pylsp.setup({
                         capabilities = capabilities,
@@ -134,6 +127,10 @@ return {
                 capabilities = capabilities,
             })
         end
+        lspconfig.gopls.setup({
+            capabilities = capabilities,
+            settings = gopls_settings,
+        })
 
         local cmp = require("cmp")
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -170,4 +167,3 @@ return {
         }
     end,
 }
-
