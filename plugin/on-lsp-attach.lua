@@ -1,9 +1,3 @@
-require("tikhon.set")
-require("tikhon.remap")
-require("tikhon.lazy_init")
-
-local api = vim.api
-
 ---@param bufnr integer
 ---@param mode "v"|"V"
 ---@return table {start={row,col}, end={row,col}} using (1, 0) indexing
@@ -26,7 +20,7 @@ local function range_from_selection(bufnr, mode)
     end
     if mode == 'V' then
         start_col = 1
-        local lines = api.nvim_buf_get_lines(bufnr, end_row - 1, end_row, true)
+        local lines = vim.api.nvim_buf_get_lines(bufnr, end_row - 1, end_row, true)
         end_col = #lines[1]
     end
     return {
@@ -36,8 +30,8 @@ local function range_from_selection(bufnr, mode)
 end
 
 local lsp_buf_format = function()
-    local bufnr = api.nvim_get_current_buf()
-    local mode = api.nvim_get_mode().mode
+    local bufnr = vim.api.nvim_get_current_buf()
+    local mode = vim.api.nvim_get_mode().mode
     local range ---@type {start:[integer,integer],end:[integer, integer]}|{start:[integer,integer],end:[integer,integer]}[]
     if not range and mode == 'v' or mode == 'V' then
         range = range_from_selection(bufnr, mode)
@@ -55,7 +49,7 @@ local lsp_buf_format = function()
     end
 
     local clients = vim.lsp.get_clients({
-        bufnr = api.nvim_get_current_buf(),
+        bufnr = vim.api.nvim_get_current_buf(),
         method = method,
     })
     if #clients == 0 then
@@ -63,12 +57,12 @@ local lsp_buf_format = function()
         return
     end
     if vim.bo.filetype == "templ" then
-        local filename = api.nvim_buf_get_name(bufnr)
+        local filename = vim.api.nvim_buf_get_name(bufnr)
         local cmd = "templ fmt " .. vim.fn.shellescape(filename)
         vim.fn.jobstart(cmd, {
             on_exit = function()
                 -- Reload the buffer only if it's still the current buffer
-                if api.nvim_get_current_buf() == bufnr then
+                if vim.api.nvim_get_current_buf() == bufnr then
                     vim.cmd('e!')
                 end
             end,
@@ -78,29 +72,14 @@ local lsp_buf_format = function()
     end
 end
 
-local augroup = api.nvim_create_augroup
-local autocmd = api.nvim_create_autocmd
-
-local yank_group = augroup("HighlightYank", {})
-autocmd("TextYankPost", {
-    group = yank_group,
-    pattern = "*",
-    callback = function()
-        vim.highlight.on_yank({
-            higroup = "IncSearch",
-            timeout = 100,
-        })
-    end,
-})
-
-local remap_lsp_group = augroup("RemapLsp", {})
-autocmd("LspAttach", {
+local remap_lsp_group = vim.api.nvim_create_augroup("RemapLsp", {})
+vim.api.nvim_create_autocmd("LspAttach", {
     group = remap_lsp_group,
     callback = function(e)
         local opts = { buffer = e.buf }
 
-        local format_on_save_group = augroup("formatOnSave", {})
-        autocmd("BufWritePre", {
+        local format_on_save_group = vim.api.nvim_create_augroup("formatOnSave", {})
+        vim.api.nvim_create_autocmd("BufWritePre", {
             group = format_on_save_group,
             buffer = e.buf,
             callback = lsp_buf_format,
@@ -121,19 +100,3 @@ autocmd("LspAttach", {
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
     end
 })
-
-local two_spaces_identaiton = augroup("TwoSpacesIndentation", {})
-autocmd("FileType", {
-    group = two_spaces_identaiton,
-    pattern = "json,html,xml,yaml",
-    callback = function()
-        vim.bo.tabstop = 2
-        vim.bo.softtabstop = 2
-        vim.bo.shiftwidth = 2
-    end,
-})
-
-vim.g.netrw_bufsettings = "noma nomod nu nowrap ro nobl"
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
-

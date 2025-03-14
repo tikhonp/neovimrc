@@ -39,4 +39,3 @@ vim.opt.splitbelow = true
 vim.opt.hlsearch = true
 
 vim.opt.termguicolors = true
-
