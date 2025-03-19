@@ -79,6 +79,7 @@ return {
             "pylsp",
             "ts_ls",
             "bashls",
+            "neocmake",
         }
         if vim.loop.os_uname().sysname == "Darwin" then
             table.insert(mason_servers, "clangd")
