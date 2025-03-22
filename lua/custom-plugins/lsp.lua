@@ -125,6 +125,7 @@ return {
         if vim.loop.os_uname().sysname == "Linux" then
             -- clangd native setup for my aarch64 linux
             lspconfig.clangd.setup({
+                cmd = { 'clangd', '--background-index', },
                 capabilities = capabilities,
             })
         end
