@@ -161,9 +161,13 @@ return {
 
         vim.keymap.set("n", "<leader>vlr", "<cmd>LspRestart<CR>", { desc = "[V]im [L]sp [R]estart" })
 
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-            border = "rounded",
-        })
+        local hover = vim.lsp.buf.hover
+        ---@diagnostic disable-next-line: duplicate-set-field
+        vim.lsp.buf.hover = function()
+            return hover({
+                border = "rounded",
+            })
+        end
         vim.diagnostic.config {
             float = { border = "rounded" },
         }
