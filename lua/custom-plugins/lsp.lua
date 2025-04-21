@@ -74,12 +74,9 @@ return {
         local mason_servers = {
             "lua_ls",
             "templ",
-            "html",
-            "tailwindcss",
             "pylsp",
             "ts_ls",
             "bashls",
-            "neocmake",
         }
         if vim.loop.os_uname().sysname == "Darwin" then
             table.insert(mason_servers, "clangd")
@@ -102,19 +99,6 @@ return {
                         settings = lua_ls_settings,
                     })
                 end,
-                html = function()
-                    lspconfig.html.setup({
-                        capabilities = capabilities,
-                        filetypes = { "html", "templ" },
-                    })
-                end,
-                tailwindcss = function()
-                    lspconfig.tailwindcss.setup({
-                        capabilities = capabilities,
-                        filetypes = { "templ", "astro", "javascript", "typescript", "react" },
-                        init_options = { userLanguages = { templ = "html" } },
-                    })
-                end
             }
         })
 
@@ -159,7 +143,7 @@ return {
             }),
         })
 
-        vim.keymap.set("n", "<leader>vlr", "<cmd>LspRestart<CR>", { desc = "[V]im [L]sp [R]estart" })
+        vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>", { desc = "[L]sp [R]estart" })
 
         local hover = vim.lsp.buf.hover
         ---@diagnostic disable-next-line: duplicate-set-field
@@ -170,6 +154,7 @@ return {
         end
         vim.diagnostic.config {
             float = { border = "rounded" },
+            virtual_text = true,
         }
     end,
 }
