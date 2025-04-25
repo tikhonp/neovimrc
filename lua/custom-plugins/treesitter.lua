@@ -2,14 +2,10 @@ return {
 
     "nvim-treesitter/nvim-treesitter",
 
-    dependencies = {
-        "apple/pkl-neovim",
-    },
-
     build = ":TSUpdate",
 
     opts = {
-        ensure_installed = { "sql", "pkl", "javascript", "typescript", "bash", "html", "lua", "markdown", "vim", "vimdoc", "go" },
+        ensure_installed = { "sql", "javascript", "typescript", "bash", "html", "lua", "markdown", "vim", "vimdoc", "go" },
         sync_install = false,
         auto_install = true,
         indent = {
