@@ -11,6 +11,8 @@ return {
     event = "InsertEnter",
 
     config = function()
+        require("luasnip.loaders.from_lua").lazy_load({ paths={ "./snippets/"}})
+
         local ls = require("luasnip")
 
         vim.keymap.set({ "i", "s" }, "<C-s>;", function() ls.jump(1) end, { silent = true })
