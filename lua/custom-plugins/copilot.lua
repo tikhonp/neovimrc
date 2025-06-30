@@ -2,6 +2,8 @@ return {
 
     "github/copilot.vim",
 
+    lazy = false,
+
     keys = {
         { "<leader>cp", "<cmd>Copilot panel<CR>", "n" },
         { "<leader>ce", function()
