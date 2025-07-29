@@ -5,7 +5,7 @@ return {
     },
     event = "VeryLazy",
     config = function()
-        require("trouble").setup({})
+        require("trouble").setup()
 
         local remap_lsp_group = vim.api.nvim_create_augroup("TroubleRemapLsp", {})
         vim.api.nvim_create_autocmd("LspAttach", {
