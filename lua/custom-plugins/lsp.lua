@@ -4,14 +4,7 @@ return {
 
     dependencies = {
         "L3MON4D3/LuaSnip",
-        {
-            "j-hui/fidget.nvim",
-
-            -- waiting for https://github.com/j-hui/fidget.nvim/issues/282 fix
-            commit = "e4e71e915b2eb28126262f9591853929c9974400",
-
-            opts = {},
-        },
+        { "j-hui/fidget.nvim", opts = {} },
         {
             "saghen/blink.cmp",
             opts = {
@@ -24,7 +17,7 @@ return {
                     },
                     documentation = {
                         auto_show = true,
-                        window = { winhighlight = "Normal:Normal,FloatBorder:FloatBorder" },
+                        window = { border = "rounded", winhighlight = "Normal:Normal,FloatBorder:FloatBorder" },
                     },
                 },
                 fuzzy = { implementation = "lua" }
@@ -40,6 +33,19 @@ return {
     event = "VeryLazy",
 
     config = function()
+        vim.diagnostic.config {
+            float = { border = "rounded" },
+            virtual_text = true,
+        }
+        local hover = vim.lsp.buf.hover
+        vim.lsp.buf.hover = function()
+            return hover({
+                border = "rounded",
+            })
+        end
+
+        vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>", { desc = "[L]sp [R]estart" })
+
         vim.lsp.enable({
             "lua_ls",
             "templ",
@@ -47,7 +53,31 @@ return {
             "bashls",
             "clangd",
             "gopls",
+            "pylsp",
         })
-        vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>", { desc = "[L]sp [R]estart" })
+
+        vim.lsp.config('gopls', {
+            settings = {
+                gopls = {
+                    analyses = {
+                        unusedresult = true,
+                        unusedvariable = true,
+                    },
+                    staticcheck = true,
+                },
+            },
+        })
+        vim.lsp.config('pylsp', {
+            settings = {
+                pylsp = {
+                    plugins = {
+                        pycodestyle = {
+                            ignore = { 'W292', 'E501', },
+                            maxLineLength = 100
+                        },
+                    },
+                },
+            },
+        })
     end,
 }
