@@ -33,11 +33,15 @@ return {
     event = "VeryLazy",
 
     config = function()
+        -- disable lsp on .env files
+        vim.filetype.add({ filename = { [".env"] = "dotenv" } })
+
         vim.diagnostic.config {
             float = { border = "rounded" },
             virtual_text = true,
         }
         local hover = vim.lsp.buf.hover
+        ---@diagnostic disable-next-line: duplicate-set-field
         vim.lsp.buf.hover = function()
             return hover({
                 border = "rounded",
