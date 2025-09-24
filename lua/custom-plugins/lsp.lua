@@ -83,5 +83,8 @@ return {
                 },
             },
         })
+        vim.lsp.config('clangd', {
+            cmd = { "clangd", "--query-driver=/Users/tikhon/.espressif/tools/riscv32-esp-elf/esp-14.2.0_20241119/riscv32-esp-elf/bin/riscv32-esp-elf-gcc" },
+        })
     end,
 }
