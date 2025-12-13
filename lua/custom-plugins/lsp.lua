@@ -79,6 +79,11 @@ return {
                             ignore = { 'W292', 'E501', },
                             maxLineLength = 100
                         },
+                        pyright = {
+                            enabled = true,
+                            venvPath = ".",
+                            venv = "env",
+                        }
                     },
                 },
             },
