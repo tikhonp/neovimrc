@@ -33,6 +33,7 @@ return {
     event = "VeryLazy",
 
     config = function()
+
         -- disable lsp on .env files
         vim.filetype.add({ filename = { [".env"] = "dotenv" } })
 
@@ -41,11 +42,9 @@ return {
             virtual_text = true,
         }
         local hover = vim.lsp.buf.hover
-        ---@diagnostic disable-next-line: duplicate-set-field
         vim.lsp.buf.hover = function()
-            return hover({
-                border = "rounded",
-            })
+            ---@diagnostic disable-next-line: redundant-parameter
+            return hover({ border = "rounded" })
         end
 
         vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>", { desc = "[L]sp [R]estart" })
@@ -88,8 +87,16 @@ return {
                 },
             },
         })
-        vim.lsp.config('clangd', {
-            cmd = { "clangd", "--query-driver=/Users/tikhon/.espressif/tools/riscv32-esp-elf/esp-14.2.0_20241119/riscv32-esp-elf/bin/riscv32-esp-elf-gcc" },
+        -- vim.lsp.config('clangd', {
+        --     cmd = { "clangd", "--query-driver=/Users/tikhon/.espressif/tools/riscv32-esp-elf/esp-14.2.0_20241119/riscv32-esp-elf/bin/riscv32-esp-elf-gcc" },
+        -- })
+
+        vim.lsp.config("lua_ls", {
+            settings = {
+                Lua = {
+                    diagnostics = { globals = { "vim" } }
+                }
+            }
         })
     end,
 }
