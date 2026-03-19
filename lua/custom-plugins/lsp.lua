@@ -33,7 +33,6 @@ return {
     event = "VeryLazy",
 
     config = function()
-
         -- disable lsp on .env files
         vim.filetype.add({ filename = { [".env"] = "dotenv" } })
 
@@ -42,6 +41,7 @@ return {
             virtual_text = true,
         }
         local hover = vim.lsp.buf.hover
+        ---@diagnostic disable-next-line: duplicate-set-field
         vim.lsp.buf.hover = function()
             ---@diagnostic disable-next-line: redundant-parameter
             return hover({ border = "rounded" })
