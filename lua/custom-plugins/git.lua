@@ -42,8 +42,16 @@ return {
                     vim.keymap.set(mode, l, r, opts)
                 end
 
-                map("n", "<leader>gx", gitsigns.reset_hunk)
                 map("n", "<leader>gg", gitsigns.preview_hunk_inline)
+                map("n", "<leader>gs", gitsigns.stage_hunk)
+                map("n", "<leader>gx", gitsigns.reset_hunk)
+
+                map("v", "<leader>gs", function()
+                    gitsigns.stage_hunk { vim.fn.line("."), vim.fn.line("v") }
+                end)
+                map("v", "<leader>gx", function()
+                    gitsigns.reset_hunk { vim.fn.line("."), vim.fn.line("v") }
+                end)
             end,
         },
     },
