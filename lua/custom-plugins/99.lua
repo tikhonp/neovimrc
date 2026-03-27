@@ -4,6 +4,10 @@ return {
         { 'saghen/blink.compat', version = '2.*' },
     },
     config = function()
+        -- tmp dir outside of project root
+        local cache_dir = vim.fn.stdpath('cache') ..
+        '/99/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t'):gsub('[^%w]', '')
+
         local _99 = require("99")
 
         _99.setup({
@@ -15,7 +19,7 @@ return {
             -- and generation will fail refer to tool documentation to resolve
             -- https://opencode.ai/docs/permissions/#external-directories
             -- https://code.claude.com/docs/en/permissions#read-and-edit
-            tmp_dir = "./tmp",
+            tmp_dir = cache_dir,
 
             --- Completions: #rules and @files in the prompt buffer
             completion = {
