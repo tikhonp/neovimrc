@@ -7,5 +7,5 @@ return {
     keys = {
         { "<leader>pu", "<cmd>PlantumlOpen<CR>", "n" },
     },
-    lazy = false,
+    -- lazy = false,
 }
