@@ -7,7 +7,7 @@ return {
         { "<leader>tt", "<cmd>TypstPreviewSyncCursor<CR>", "n"}
     },
     opts = {
-        open_cmd = 'google-chrome-stable --app=%s',
+        open_cmd = os.getenv("TYPST_BROWSER_OPEN_CMD") or nil,
         -- invert_colors = 'auto',
     },
 }
