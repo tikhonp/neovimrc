@@ -4,43 +4,34 @@ return {
 
     build = ":TSUpdate",
 
-    -- compatibility branch
-    -- i dont really know how to use newer version
-    branch = "master",
+    branch = "main",
 
     lazy = false,
 
     config = function()
-        require("nvim-treesitter.configs").setup({
-            ensure_installed = {
-                "sql", "javascript", "typescript",
-                "bash", "html", "lua", "markdown", "vim", "vimdoc", "go"
-            },
-            sync_install = false,
-            auto_install = true,
-            indent = {
-                enable = true
-            },
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = { "markdown" },
-            },
-            modules = {},
-            ignore_install = {},
-        })
-
-        -- templ lang
-        vim.filetype.add({ extension = { templ = "templ" } })
-        require('nvim-treesitter.parsers').templ = {
-            install_info = {
-                url = "https://github.com/vrischmann/tree-sitter-templ.git",
-                files = { "src/parser.c", "src/scanner.c" },
-                branch = "master",
-            },
+        require('nvim-treesitter').install {
+            "sql", "javascript", "typescript",
+            "bash", "html", "lua", "markdown",
+            "vim", "vimdoc", "go", "templ",
+            "gitcommit", "gitignore", "gitattributes", "git_rebase",
+            "git_config",
         }
-        vim.treesitter.language.register("templ", "templ")
 
         vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
-    end,
 
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+        local group = vim.api.nvim_create_augroup("custom-treesitter", { clear = true })
+        vim.api.nvim_create_autocmd("FileType", {
+            group = group,
+            callback = function(args)
+                local bufnr = args.buf
+                local ok, parser = pcall(vim.treesitter.get_parser, bufnr)
+                if not ok or not parser then
+                    return
+                end
+                pcall(vim.treesitter.start)
+            end,
+        })
+    end,
 }
