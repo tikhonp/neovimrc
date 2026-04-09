@@ -14,7 +14,7 @@ return {
             "bash", "html", "lua", "markdown",
             "vim", "vimdoc", "go", "templ",
             "gitcommit", "gitignore", "gitattributes", "git_rebase",
-            "git_config",
+            "git_config", "python", "dockerfile", "yaml",
         }
 
         vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
