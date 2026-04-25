@@ -22,6 +22,7 @@ return {
                 },
                 fuzzy = { implementation = "lua" }
             },
+            dependencies = { "saghen/blink.lib" },
         },
         {
             "folke/lazydev.nvim",
