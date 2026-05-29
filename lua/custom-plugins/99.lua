@@ -6,11 +6,11 @@ return {
     config = function()
         -- tmp dir outside of project root
 
-        local proxy_server  = os.getenv("MY_PROXY_SERVER")
-
-        vim.env.HTTPS_PROXY = proxy_server
-        vim.env.HTTP_PROXY  = proxy_server
-        vim.env.NO_PROXY    = "localhost,127.0.0.1"
+        -- local proxy_server  = os.getenv("MY_PROXY_SERVER")
+        --
+        -- vim.env.HTTPS_PROXY = proxy_server
+        -- vim.env.HTTP_PROXY  = proxy_server
+        -- vim.env.NO_PROXY    = "localhost,127.0.0.1"
 
         local _99           = require("99")
 
