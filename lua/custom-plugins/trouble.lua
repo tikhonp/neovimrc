@@ -19,7 +19,9 @@ return {
                     for _, client in ipairs(vim.lsp.get_clients()) do
                         require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
                     end
-                    vim.cmd("Trouble diagnostics")
+                    vim.defer_fn(function()
+                        vim.cmd("Trouble diagnostics toggle")
+                    end, 3000)
                 end)
 
                 vim.keymap.set("n", "]dd", function()
@@ -33,4 +35,3 @@ return {
         })
     end,
 }
-
