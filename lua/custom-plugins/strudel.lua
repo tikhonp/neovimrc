@@ -1,7 +1,7 @@
 return {
     "develmusa/strudel.nvim",
     branch = "fix-nodejs-v25-yargs",
-    build = "npm ci",
+    build = "PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable npm ci",
     config = function()
         require("strudel").setup({
             update_on_save = true,
