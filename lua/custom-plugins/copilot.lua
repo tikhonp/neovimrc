@@ -16,13 +16,13 @@ return {
         end, "n" },
     },
 
-    config = function()
-        local proxy_server = os.getenv("MY_PROXY_SERVER")
-        if (proxy_server == nil) then
-            vim.notify("[Copilot] Environment variable MY_PROXY_SERVER not set", vim.log.levels.WARN)
-            return
-        end
-        vim.g.copilot_proxy = proxy_server
-    end,
+    -- config = function()
+    --     local proxy_server = os.getenv("MY_PROXY_SERVER")
+    --     if (proxy_server == nil) then
+    --         vim.notify("[Copilot] Environment variable MY_PROXY_SERVER not set", vim.log.levels.WARN)
+    --         return
+    --     end
+    --     vim.g.copilot_proxy = proxy_server
+    -- end,
 
 }
