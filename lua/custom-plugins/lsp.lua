@@ -48,7 +48,7 @@ return {
             return hover({ border = "rounded" })
         end
 
-        vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>", { desc = "[L]sp [R]estart" })
+        vim.keymap.set("n", "<leader>lr", "<cmd>lsp restart<CR>", { desc = "[L]sp [R]estart" })
 
         vim.lsp.enable({
             "lua_ls",
